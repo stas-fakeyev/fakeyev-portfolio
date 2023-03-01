@@ -45,7 +45,7 @@
 							</div>
 							<!-- End Post Title & Summary -->
 							<div class="post-more">
-								<a href="{{ route('posts.show', ['post' => $post->slug]) }}" class="btn btn-small">{{ __('posts.read-more') }}</a>
+								<a href="{{ route('posts.show', ['post' => $post->slug]) }}" class="btn btn-small">{{ __('posts/pages.read-more') }}</a>
 							</div>
 						</div>
 					</div>
