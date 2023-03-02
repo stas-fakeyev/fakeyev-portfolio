@@ -4,6 +4,7 @@ namespace App\View\Components\Footer;
 
 use Illuminate\View\Component;
 use Config;
+
 class Socials extends Component
 {
     /**
@@ -11,13 +12,13 @@ class Socials extends Component
      *
      * @return void
      */
-	 public $links = [];
+    public $links = [];
     public function __construct()
     {
         //
-		$this->links['facebook'] = Config::get('settings.facebook');
-				$this->links['twitter'] = Config::get('settings.twitter');
-		$this->links['instagram'] = Config::get('settings.instagram');
+        $this->links['facebook'] = Config::get('settings.facebook');
+        $this->links['twitter'] = Config::get('settings.twitter');
+        $this->links['instagram'] = Config::get('settings.instagram');
     }
 
     /**

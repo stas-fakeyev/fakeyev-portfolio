@@ -3,7 +3,6 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
@@ -11,18 +10,19 @@ use Illuminate\Queue\SerializesModels;
 
 class RestoreUserMail extends Mailable
 {
-    use Queueable, SerializesModels;
+    use Queueable;
+    use SerializesModels;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-	 protected $user;
+    protected $user;
     public function __construct($notifiable)
     {
         //
-		$this->user = $notifiable;
+        $this->user = $notifiable;
     }
 
     /**
@@ -33,7 +33,7 @@ class RestoreUserMail extends Mailable
     public function envelope()
     {
         return new Envelope(
-						            subject: __('users/mail.subject-restore'),
+            subject: __('users/mail.subject-restore'),
         );
     }
 
@@ -45,13 +45,13 @@ class RestoreUserMail extends Mailable
     public function content()
     {
         return new Content(
-						            view: 'mail.restore-user',
-						with: [
-			'user' => $this->user,
-			'mailHeader' => __('users/mail.header-restore'),
-						'mailMessage' => __('users/mail.message-restore'),
-			'mailFooter' => __('users/mail.footer-restore'),
-			]
+            view: 'mail.restore-user',
+            with: [
+            'user' => $this->user,
+            'mailHeader' => __('users/mail.header-restore'),
+            'mailMessage' => __('users/mail.message-restore'),
+            'mailFooter' => __('users/mail.footer-restore'),
+            ]
         );
     }
 

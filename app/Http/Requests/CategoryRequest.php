@@ -26,58 +26,57 @@ class CategoryRequest extends FormRequest
      */
     public function rules()
     {
-		$rules = [];
-		$rules['title'] = [
-			'bail',
-			'required',
-			'string',
-			'max:60',
-			Rule::unique('categories')->ignore($this->route('category')),
-			];
-									$rules['slug'] = [
-									'nullable',
-			'string',
-			'max:70',
-			Rule::unique('categories')->ignore($this->route('category')),
-			];
-			$rules['language'] = [
+        $rules = [];
+        $rules['title'] = [
+            'bail',
+            'required',
+            'string',
+            'max:60',
+            Rule::unique('categories')->ignore($this->route('category')),
+            ];
+        $rules['slug'] = [
+        'nullable',
+            'string',
+            'max:70',
+            Rule::unique('categories')->ignore($this->route('category')),
+            ];
+        $rules['language'] = [
 'bail',
 'required',
 'string',
 'max:2',
-new Language];
+new Language()];
 
-			$rules['parent_id'] = [
+        $rules['parent_id'] = [
 'present',
 'integer',
 ];
-if (!is_null($this->input('parent_id')) && $this->input('parent_id') > 0){
-	$rules['parent_id'][] = Rule::exists('categories', 'id');
-}
-if ($this->method() === 'PUT'){
-	$model = $this->route('category');
-	$rules['parent_id'][] = new ParentCategory($model);
-}
+        if (!is_null($this->input('parent_id')) && $this->input('parent_id') > 0) {
+            $rules['parent_id'][] = Rule::exists('categories', 'id');
+        }
+        if ($this->method() === 'PUT') {
+            $model = $this->route('category');
+            $rules['parent_id'][] = new ParentCategory($model);
+        }
         return $rules;
     }
-		public function messages()
-	{
-		return [
-						'title.required' => trans('categories/validation.title.required'),
-				'title.string' => trans('categories/validation.title.string'),
-		'title.max' => trans('categories/validation.title.max'),
-		'title.unique' => trans('categories/validation.title.unique'),
-		
-						'slug.string' => trans('categories/validation.slug.string'),
-		'slug.max' => trans('categories/validation.slug.max'),
+        public function messages()
+        {
+            return [
+                            'title.required' => trans('categories/validation.title.required'),
+                    'title.string' => trans('categories/validation.title.string'),
+            'title.max' => trans('categories/validation.title.max'),
+            'title.unique' => trans('categories/validation.title.unique'),
+
+                            'slug.string' => trans('categories/validation.slug.string'),
+            'slug.max' => trans('categories/validation.slug.max'),
 // parent_id
-								'parent_id.integer' => trans('categories/validation.parent_id.integer'),
-																'parent_id.exists' => trans('categories/validation.parent_id.exists'),
-		'language.required' => trans('categories/validation.language.required'),
-				'language.string' => trans('categories/validation.language.string'),
-		'language.max' => trans('categories/validation.language.max'),
+                                    'parent_id.integer' => trans('categories/validation.parent_id.integer'),
+                                                                    'parent_id.exists' => trans('categories/validation.parent_id.exists'),
+            'language.required' => trans('categories/validation.language.required'),
+                    'language.string' => trans('categories/validation.language.string'),
+            'language.max' => trans('categories/validation.language.max'),
 
-		];
-	}
-
+            ];
+        }
 }

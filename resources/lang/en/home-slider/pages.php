@@ -1,4 +1,5 @@
 <?php
+
 return [
 'title_create' => 'Creating a new slide',
 'text_create' => 'Add a new slide to the home slider.',

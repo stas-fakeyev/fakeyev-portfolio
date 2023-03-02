@@ -170,7 +170,7 @@ return [
     */
 
     'attributes' => [
-	'title' => 'the Title',
-	],
+    'title' => 'the Title',
+    ],
 
 ];

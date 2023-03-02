@@ -27,8 +27,8 @@ class Language implements Rule
     public function passes($attribute, $value)
     {
         //
-				$properties = LaravelLocalization::getSupportedLocales();
-return array_key_exists($value, $properties);
+        $properties = LaravelLocalization::getSupportedLocales();
+        return array_key_exists($value, $properties);
     }
 
     /**

@@ -12,15 +12,14 @@ class Contacts extends Component
      *
      * @return void
      */
-	 public $contacts = [];
+    public $contacts = [];
     public function __construct()
     {
         //
-		$this->contacts['address'] = Config::get('settings.address');
-				$this->contacts['phone'] = Config::get('settings.phone');
-		$this->contacts['fax'] = Config::get('settings.fax');
-		$this->contacts['email'] = Config::get('settings.email');
-
+        $this->contacts['address'] = Config::get('settings.address');
+        $this->contacts['phone'] = Config::get('settings.phone');
+        $this->contacts['fax'] = Config::get('settings.fax');
+        $this->contacts['email'] = Config::get('settings.email');
     }
 
     /**

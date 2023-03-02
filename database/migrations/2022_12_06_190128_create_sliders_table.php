@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class () extends Migration {
     /**
      * Run the migrations.
      *
@@ -15,10 +14,10 @@ return new class extends Migration
     {
         Schema::create('sliders', function (Blueprint $table) {
             $table->id();
-			$table->string('title', 60);
-			$table->string('subtitle', 100);
-			$table->json('images');
-			$table->string('language', 2);
+            $table->string('title', 60);
+            $table->string('subtitle', 100);
+            $table->json('images');
+            $table->string('language', 2);
             $table->timestamps();
         });
     }

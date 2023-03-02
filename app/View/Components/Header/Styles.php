@@ -13,18 +13,18 @@ class Styles extends Component
      *
      * @return void
      */
-	 public $styles;
-	 public $scripts;
-	 
+    public $styles;
+    public $scripts;
+
     public function __construct(EnqueueScripts $enqueueScripts)
     {
         //
-		if (count( $enqueueScripts->header['styles'] ) > 0) {
-			$this->styles = $enqueueScripts->header['styles'];
-		}
-		if( count( $enqueueScripts->header['scripts'] ) > 0) {
-			$this->scripts = $enqueueScripts->header['scripts'];
-		}
+        if (count($enqueueScripts->header['styles']) > 0) {
+            $this->styles = $enqueueScripts->header['styles'];
+        }
+        if (count($enqueueScripts->header['scripts']) > 0) {
+            $this->scripts = $enqueueScripts->header['scripts'];
+        }
     }
 
     /**

@@ -1,4 +1,5 @@
 <?php
+
 return [
 'store' => 'the post was created successfully!',
 'update' => 'the Post was updated successfully!',

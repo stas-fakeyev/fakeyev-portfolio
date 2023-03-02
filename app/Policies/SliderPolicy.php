@@ -19,8 +19,7 @@ class SliderPolicy
     public function viewAny(User $user)
     {
         //
-				return $user->role->name === 'administrator' || $user->role->name === 'editor';
-
+        return $user->role->name === 'administrator' || $user->role->name === 'editor';
     }
 
     /**
@@ -44,7 +43,7 @@ class SliderPolicy
     public function create(User $user)
     {
         //
-				return $user->role->name === 'administrator' || $user->role->name === 'editor';
+        return $user->role->name === 'administrator' || $user->role->name === 'editor';
     }
 
     /**
@@ -57,8 +56,7 @@ class SliderPolicy
     public function update(User $user, Slider $slider)
     {
         //
-		return $user->role->name === 'administrator' || $user->role->name === 'editor';
-
+        return $user->role->name === 'administrator' || $user->role->name === 'editor';
     }
 
     /**
@@ -71,8 +69,7 @@ class SliderPolicy
     public function delete(User $user, Slider $slider)
     {
         //
-				return $user->role->name === 'administrator' || $user->role->name === 'editor';
-
+        return $user->role->name === 'administrator' || $user->role->name === 'editor';
     }
 
     /**
@@ -85,8 +82,7 @@ class SliderPolicy
     public function restore(User $user, Slider $slider)
     {
         //
-				return $user->role->name === 'administrator' || $user->role->name === 'editor';
-
+        return $user->role->name === 'administrator' || $user->role->name === 'editor';
     }
 
     /**
@@ -99,7 +95,6 @@ class SliderPolicy
     public function forceDelete(User $user, Slider $slider)
     {
         //
-				return $user->role->name === 'administrator' || $user->role->name === 'editor';
-
+        return $user->role->name === 'administrator' || $user->role->name === 'editor';
     }
 }

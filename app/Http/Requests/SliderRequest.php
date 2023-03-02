@@ -27,24 +27,24 @@ class SliderRequest extends FormRequest
     {
         return [
             //
-			'title' => [
-			'bail',
-			'required',
-			'string',
-			'max:50',
-			Rule::unique('sliders')->ignore($this->route('slider')),
-			],
-						'subtitle' => [
-						'bail',
-						'required',
-						'string',
-						'max:90',
-						Rule::unique('sliders')->ignore($this->route('slider')),
-						],
-						'background' => [
-						'mimes:jpeg,jpg,png',
-						'max:5000'
-						],
+            'title' => [
+            'bail',
+            'required',
+            'string',
+            'max:50',
+            Rule::unique('sliders')->ignore($this->route('slider')),
+            ],
+                        'subtitle' => [
+                        'bail',
+                        'required',
+                        'string',
+                        'max:90',
+                        Rule::unique('sliders')->ignore($this->route('slider')),
+                        ],
+                        'background' => [
+                        'mimes:jpeg,jpg,png',
+                        'max:5000'
+                        ],
 'slide' => [
 'mimes:jpeg,jpg,png',
 'max:5000'
@@ -54,32 +54,33 @@ class SliderRequest extends FormRequest
 'required',
 'string',
 'max:2',
-new Language],
+new Language()],
         ];
     }
-	
-	public function messages(){
-		return [
-		'title.required' => trans('home-slider/validation.title.required'),
-				'title.string' => trans('home-slider/validation.title.string'),
-		'title.max' => trans('home-slider/validation.title.max'),
-		'title.unique' => trans('home-slider/validation.title.unique'),
-// subtitle
-		'subtitle.required' => trans('home-slider/validation.subtitle.required'),
-				'subtitle.string' => trans('home-slider/validation.subtitle.string'),
-		'subtitle.max' => trans('home-slider/validation.subtitle.max'),
-		'subtitle.unique' => trans('home-slider/validation.subtitle.unique'),
-// background
-		'background.mimes' => trans('home-slider/validation.background.mimes'),
-				'background.max' => trans('home-slider/validation.background.max'),
-// slide
-		'slide.mimes' => trans('home-slider/validation.slide.mimes'),
-				'slide.max' => trans('home-slider/validation.slide.max'),
-// language
-		'language.required' => trans('home-slider/validation.language.required'),
-				'language.string' => trans('home-slider/validation.language.string'),
-		'language.max' => trans('home-slider/validation.language.max'),
 
-		];
-	}
+    public function messages()
+    {
+        return [
+        'title.required' => trans('home-slider/validation.title.required'),
+                'title.string' => trans('home-slider/validation.title.string'),
+        'title.max' => trans('home-slider/validation.title.max'),
+        'title.unique' => trans('home-slider/validation.title.unique'),
+// subtitle
+        'subtitle.required' => trans('home-slider/validation.subtitle.required'),
+                'subtitle.string' => trans('home-slider/validation.subtitle.string'),
+        'subtitle.max' => trans('home-slider/validation.subtitle.max'),
+        'subtitle.unique' => trans('home-slider/validation.subtitle.unique'),
+// background
+        'background.mimes' => trans('home-slider/validation.background.mimes'),
+                'background.max' => trans('home-slider/validation.background.max'),
+// slide
+        'slide.mimes' => trans('home-slider/validation.slide.mimes'),
+                'slide.max' => trans('home-slider/validation.slide.max'),
+// language
+        'language.required' => trans('home-slider/validation.language.required'),
+                'language.string' => trans('home-slider/validation.language.string'),
+        'language.max' => trans('home-slider/validation.language.max'),
+
+        ];
+    }
 }

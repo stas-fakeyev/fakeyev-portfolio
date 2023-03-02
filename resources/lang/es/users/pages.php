@@ -1,4 +1,5 @@
 <?php
+
 return [
 'title_create' => 'Creating a new User',
 'text_create' => 'add a new User.',

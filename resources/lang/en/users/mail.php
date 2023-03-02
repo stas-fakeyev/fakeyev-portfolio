@@ -1,4 +1,5 @@
 <?php
+
 return [
 'subject-create' => 'Creating the account by the Administrator',
 'header-create' => 'Hello, the Administrator has created the account for you.',

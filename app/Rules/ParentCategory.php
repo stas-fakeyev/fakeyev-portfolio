@@ -1,13 +1,14 @@
 <?php
 
 namespace App\Rules;
+
 use App\Models\Category;
 
 use Illuminate\Contracts\Validation\Rule;
 
 class ParentCategory implements Rule
 {
-	private $category;
+    private $category;
     /**
      * Create a new rule instance.
      *
@@ -16,7 +17,7 @@ class ParentCategory implements Rule
     public function __construct(Category $category)
     {
         //
-		$this->category = $category;
+        $this->category = $category;
     }
 
     /**
@@ -29,7 +30,7 @@ class ParentCategory implements Rule
     public function passes($attribute, $value)
     {
         //
-		return $this->category->validParent($value);
+        return $this->category->validParent($value);
     }
 
     /**

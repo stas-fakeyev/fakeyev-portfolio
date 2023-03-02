@@ -1,4 +1,5 @@
 <?php
+
 return [
 'title_create' => 'Creating a new Post',
 'text_create' => 'add a new Post.',

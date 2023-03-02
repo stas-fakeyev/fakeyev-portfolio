@@ -20,25 +20,24 @@ class TotalcategoryPolicy
     {
         //
     }
-		    public function viewAny(User $user)
-    {
+            public function viewAny(User $user)
+            {
         //
-				return $user->role->name === 'administrator' || $user->role->name === 'editor';
-    }
+                return $user->role->name === 'administrator' || $user->role->name === 'editor';
+            }
     public function create(User $user)
     {
         //
-				return $user->role->name === 'administrator' || $user->role->name === 'editor';
+        return $user->role->name === 'administrator' || $user->role->name === 'editor';
     }
     public function restore(User $user, Totalcategory $totalcategory)
     {
         //
-				return $user->role->name === 'administrator' || $user->role->name === 'editor';
+        return $user->role->name === 'administrator' || $user->role->name === 'editor';
     }
     public function forceDelete(User $user, Totalcategory $totalcategory)
     {
         //
-				return $user->role->name === 'administrator' || $user->role->name === 'editor';
+        return $user->role->name === 'administrator' || $user->role->name === 'editor';
     }
-
 }

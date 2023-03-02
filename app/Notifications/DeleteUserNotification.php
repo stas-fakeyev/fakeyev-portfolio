@@ -3,8 +3,6 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use App\Mail\DeleteUserMail;
 
@@ -41,7 +39,7 @@ class DeleteUserNotification extends Notification
      */
     public function toMail($notifiable)
     {
-		return (new DeleteUserMail($notifiable))->to($notifiable->email, $notifiable->name);
+        return (new DeleteUserMail($notifiable))->to($notifiable->email, $notifiable->name);
     }
 
     /**

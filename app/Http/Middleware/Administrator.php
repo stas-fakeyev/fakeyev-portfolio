@@ -17,8 +17,10 @@ class Administrator
      */
     public function handle(Request $request, Closure $next)
     {
-		// if the current user is custommer, throw 403
-if (!Gate::allows('access-adminpanel')) abort(403);
+        // if the current user is custommer, throw 403
+        if (!Gate::allows('access-adminpanel')) {
+            abort(403);
+        }
 
         return $next($request);
     }

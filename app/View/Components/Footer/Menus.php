@@ -1,6 +1,7 @@
 <?php
 
 namespace App\View\Components\Footer;
+
 use App\Helpers\MenuHelper;
 
 
@@ -13,14 +14,13 @@ class Menus extends Component
      *
      * @return void
      */
-	 public $menu;
+    public $menu;
 
     public function __construct()
     {
         //
-		$menuHelper = new MenuHelper();
-		$this->menu = $menuHelper->footerMenu();
-
+        $menuHelper = new MenuHelper();
+        $this->menu = $menuHelper->footerMenu();
     }
 
     /**

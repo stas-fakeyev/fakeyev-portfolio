@@ -1,4 +1,5 @@
 <?php
+
 return [
 'comments' => 'Comments',
 'leave' => 'Leave a Comment',

@@ -3,7 +3,6 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
@@ -11,19 +10,20 @@ use Illuminate\Queue\SerializesModels;
 
 class UpdateUserMail extends Mailable
 {
-    use Queueable, SerializesModels;
+    use Queueable;
+    use SerializesModels;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-	 protected $user;
-	 
+    protected $user;
+
     public function __construct($notifiable)
     {
         //
-		$this->user = $notifiable;
+        $this->user = $notifiable;
     }
 
     /**
@@ -34,7 +34,7 @@ class UpdateUserMail extends Mailable
     public function envelope()
     {
         return new Envelope(
-		            subject: __('users/mail.subject-update'),
+            subject: __('users/mail.subject-update'),
         );
     }
 
@@ -46,13 +46,13 @@ class UpdateUserMail extends Mailable
     public function content()
     {
         return new Content(
-		            view: 'mail.update-user',
-						with: [
-			'user' => $this->user,
-			'mailHeader' => __('users/mail.header-update'),
-						'mailMessage' => __('users/mail.message-update'),
-			'mailFooter' => __('users/mail.footer-update'),
-			]
+            view: 'mail.update-user',
+            with: [
+            'user' => $this->user,
+            'mailHeader' => __('users/mail.header-update'),
+            'mailMessage' => __('users/mail.message-update'),
+            'mailFooter' => __('users/mail.footer-update'),
+            ]
         );
     }
 

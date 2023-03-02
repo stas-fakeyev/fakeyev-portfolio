@@ -27,25 +27,25 @@ class PostRequest extends FormRequest
     {
         return [
             //
-									'title' => [
-			'bail',
-			'required',
-			'string',
-			'max:60',
-			Rule::unique('posts')->ignore($this->route('post')),
-			],
-									'slug' => [
-									'nullable',
-			'string',
-			'max:100',
-			Rule::unique('posts')->ignore($this->route('post')),
-			],
-									'text' => [
-			'bail',
-			'required',
-			'string',
-			'max:50000',
-			],
+                                    'title' => [
+            'bail',
+            'required',
+            'string',
+            'max:60',
+            Rule::unique('posts')->ignore($this->route('post')),
+            ],
+                                    'slug' => [
+                                    'nullable',
+            'string',
+            'max:100',
+            Rule::unique('posts')->ignore($this->route('post')),
+            ],
+                                    'text' => [
+            'bail',
+            'required',
+            'string',
+            'max:50000',
+            ],
 'image' => [
 'mimes:jpeg,jpg,png',
 'max:5000',
@@ -55,41 +55,40 @@ class PostRequest extends FormRequest
 'required',
 'string',
 'max:2',
-new Language],
+new Language()],
 'category_id' => [
 'required',
 'integer',
-			Rule::exists('categories', 'id'),
+            Rule::exists('categories', 'id'),
 ],
-
-        ]; //endarray
+        ];
     }
-	public function messages()
-	{
-		return [
-						'title.required' => trans('posts/validation.title.required'),
-				'title.string' => trans('posts/validation.title.string'),
-		'title.max' => trans('posts/validation.title.max'),
-		'title.unique' => trans('posts/validation.title.unique'),
-		
-						'slug.string' => trans('posts/validation.slug.string'),
-		'slug.max' => trans('posts/validation.slug.max'),
+    public function messages()
+    {
+        return [
+                        'title.required' => trans('posts/validation.title.required'),
+                'title.string' => trans('posts/validation.title.string'),
+        'title.max' => trans('posts/validation.title.max'),
+        'title.unique' => trans('posts/validation.title.unique'),
 
-		'text.required' => trans('posts/validation.text.required'),
-				'text.string' => trans('posts/validation.text.string'),
-		'text.max' => trans('posts/validation.text.max'),
+                        'slug.string' => trans('posts/validation.slug.string'),
+        'slug.max' => trans('posts/validation.slug.max'),
 
-		'image.mimes' => trans('posts/validation.image.mimes'),
-				'image.max' => trans('posts/validation.image.max'),
+        'text.required' => trans('posts/validation.text.required'),
+                'text.string' => trans('posts/validation.text.string'),
+        'text.max' => trans('posts/validation.text.max'),
 
-		'language.required' => trans('posts/validation.language.required'),
-				'language.string' => trans('posts/validation.language.string'),
-		'language.max' => trans('posts/validation.language.max'),
+        'image.mimes' => trans('posts/validation.image.mimes'),
+                'image.max' => trans('posts/validation.image.max'),
+
+        'language.required' => trans('posts/validation.language.required'),
+                'language.string' => trans('posts/validation.language.string'),
+        'language.max' => trans('posts/validation.language.max'),
 // category_id
-						'category_id.required' => trans('posts/validation.category_id.required'),
-						'category_id.integer' => trans('posts/validation.category_id.integer'),
-								'category_id.exists' => trans('posts/validation.category_id.exists'),
+                        'category_id.required' => trans('posts/validation.category_id.required'),
+                        'category_id.integer' => trans('posts/validation.category_id.integer'),
+                                'category_id.exists' => trans('posts/validation.category_id.exists'),
 
-		];
-	}
+        ];
+    }
 }

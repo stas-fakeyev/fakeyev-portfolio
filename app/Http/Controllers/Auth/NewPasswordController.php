@@ -27,30 +27,30 @@ class NewPasswordController extends Controller
     }
 public function setPassword(Request $request, User $user)
 {
-$request->session()->put('set_password', 'success');
-	return view('auth.set-password', compact('request', 'user'));
+    $request->session()->put('set_password', 'success');
+    return view('auth.set-password', compact('request', 'user'));
 }
 public function makePassword(Request $request, User $user)
 {
-	$status = $request->session()->get('set_password', 'error');
-	if ($status === 'error') abort(403);
-	
-	        $request->validate([
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+    $status = $request->session()->get('set_password', 'error');
+    if ($status === 'error') {
+        abort(403);
+    }
+
+    $request->validate([
+    'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
-                $user->fill([
-                    'password' => Hash::make($request->password),
-                ])->save();
-				
-				$request->session()->forget('set_password');
-				
-				session()->flash('message', __('users/flash.set-password-success'));
+    $user->fill([
+        'password' => Hash::make($request->password),
+    ])->save();
 
-	        Auth::login($user);
+    $request->session()->forget('set_password');
 
-        return redirect(RouteServiceProvider::HOME);
+    session()->flash('message', __('users/flash.set-password-success'));
 
-	
+    Auth::login($user);
+
+    return redirect(RouteServiceProvider::HOME);
 }
     /**
      * Handle an incoming new password request.

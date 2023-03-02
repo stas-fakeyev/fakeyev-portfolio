@@ -1,4 +1,5 @@
 <?php
+
 return [
 'login' => 'Логин',
 'name' => 'Имя',

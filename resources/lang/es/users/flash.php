@@ -1,4 +1,5 @@
 <?php
+
 return [
 'store' => 'the User was created successfully!',
 'update' => 'the User was updated successfully!','delete' => 'the User was placed to the Trash!',

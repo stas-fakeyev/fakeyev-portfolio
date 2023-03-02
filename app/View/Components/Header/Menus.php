@@ -15,14 +15,14 @@ class Menus extends Component
      *
      * @return void
      */
-	 public $posts;
-	 public $menu;
+    public $posts;
+    public $menu;
     public function __construct()
     {
         //
-		$this->posts = Post::where('language', LaravelLocalization::getCurrentLocale())->get();
-		$menuHelper = new MenuHelper();
-		$this->menu = $menuHelper->menu;
+        $this->posts = Post::where('language', LaravelLocalization::getCurrentLocale())->get();
+        $menuHelper = new MenuHelper();
+        $this->menu = $menuHelper->menu;
     }
 
     /**

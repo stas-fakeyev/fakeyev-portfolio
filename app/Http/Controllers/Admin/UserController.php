@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Role;
-use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 use App\Helpers\ImageSaver;
 use Illuminate\Auth\Events\Registered;
@@ -17,30 +16,30 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-	 private $imageSaver;
-	 private $password = 12345678;
-	 
-	 public function __construct(ImageSaver $imageSaver)
-	 {
-		 $this->imageSaver = $imageSaver;
-		 
-		 $this->authorizeResource(User::class, 'user');
-	 }
-	     protected function resourceAbilityMap()
+    private $imageSaver;
+    private $password = 12345678;
+
+    public function __construct(ImageSaver $imageSaver)
     {
-        return [
-            'index' => 'viewAny',
-          'trash' => 'viewAny',
-            'show' => 'view',
-            'create' => 'create',
-            'store' => 'create',
-            'edit' => 'update',
-            'update' => 'update',
-            'destroy' => 'delete',
-			'restore' => 'restore',
-			'forceDelete' => 'forceDelete',
-        ];
+        $this->imageSaver = $imageSaver;
+
+        $this->authorizeResource(User::class, 'user');
     }
+        protected function resourceAbilityMap()
+        {
+            return [
+                'index' => 'viewAny',
+              'trash' => 'viewAny',
+                'show' => 'view',
+                'create' => 'create',
+                'store' => 'create',
+                'edit' => 'update',
+                'update' => 'update',
+                'destroy' => 'delete',
+                'restore' => 'restore',
+                'forceDelete' => 'forceDelete',
+            ];
+        }
     protected function resourceMethodsWithoutModels()
     {
         return ['index', 'create', 'store', 'trash'];
@@ -49,17 +48,17 @@ class UserController extends Controller
     public function index()
     {
         //
-		$users = User::all();
-		return view('admin.users.index', compact('users'));
+        $users = User::all();
+        return view('admin.users.index', compact('users'));
     }
 
-/* *
-get users from the trash
-*/
+    /**
+   * get users from the trash
+    */
 public function trash()
 {
-	$users = User::onlyTrashed()->get();
-	return view('admin.users.trash', compact('users'));
+    $users = User::onlyTrashed()->get();
+    return view('admin.users.trash', compact('users'));
 }
     /**
      * Show the form for creating a new resource.
@@ -69,8 +68,8 @@ public function trash()
     public function create()
     {
         //
-		$roles = Role::where('id', '!=', 1)->get();
-		return view('admin.users.create', compact('roles'));
+        $roles = Role::where('id', '!=', 1)->get();
+        return view('admin.users.create', compact('roles'));
     }
 
     /**
@@ -82,22 +81,22 @@ public function trash()
     public function store(UserRequest $request)
     {
         //
-		$data = $request->safe()->all();
-		
-		$requestImage = $request->file('avatar');
-								if($requestImage){
-						$data['avatar'] = $this->imageSaver->upload($requestImage, null, 'users');
-						}
-						else $data['avatar'] = 'canon.png';
-						
-								$data['password'] = $this->password;
-								
-$user = User::create($data);
-						        event(new Registered($user));
+        $data = $request->safe()->all();
 
-			    session()->flash('message', trans('users/flash.store'));
+        $requestImage = $request->file('avatar');
+        if ($requestImage) {
+            $data['avatar'] = $this->imageSaver->upload($requestImage, null, 'users');
+        } else {
+            $data['avatar'] = 'canon.png';
+        }
+
+        $data['password'] = $this->password;
+
+        $user = User::create($data);
+        event(new Registered($user));
+
+        session()->flash('message', trans('users/flash.store'));
         return to_route('admin.users.edit', ['user' => $user->id]);
-
     }
 
     /**
@@ -120,8 +119,8 @@ $user = User::create($data);
     public function edit(User $user)
     {
         //
-		$roles = Role::where('id', '!=', 1)->get();
-		return view('admin.users.edit', compact('user', 'roles'));
+        $roles = Role::where('id', '!=', 1)->get();
+        return view('admin.users.edit', compact('user', 'roles'));
     }
 
     /**
@@ -134,19 +133,19 @@ $user = User::create($data);
     public function update(UserRequest $request, User $user)
     {
         //
-				$data = $request->safe()->all();
-		
-		$requestImage = $request->file('avatar');
-								if($requestImage){
-						$data['avatar'] = $this->imageSaver->upload($requestImage, $user->avatar, 'users');
-						}
-						else $data['avatar'] = $user->avatar ?? 'canon.png';
-						
+        $data = $request->safe()->all();
 
-$user->update($data);
-session()->flash('message', trans('users/flash.update'));
-return to_route('admin.users.edit', ['user' => $user->id]);
+        $requestImage = $request->file('avatar');
+        if ($requestImage) {
+            $data['avatar'] = $this->imageSaver->upload($requestImage, $user->avatar, 'users');
+        } else {
+            $data['avatar'] = $user->avatar ?? 'canon.png';
+        }
 
+
+        $user->update($data);
+        session()->flash('message', trans('users/flash.update'));
+        return to_route('admin.users.edit', ['user' => $user->id]);
     }
 
     /**
@@ -158,29 +157,31 @@ return to_route('admin.users.edit', ['user' => $user->id]);
     public function destroy(User $user)
     {
         //
-		$user->delete();
+        $user->delete();
 
-		session()->flash('message', trans('users/flash.delete'));
-		return to_route('admin.users.index');
-
+        session()->flash('message', trans('users/flash.delete'));
+        return to_route('admin.users.index');
     }
-		/* *
-	restore the deleted user
-	*/
-	public function restore(User $user)
-	{
-		if ($user->trashed()) $user->restore();
-				session()->flash('message', trans('users/flash.restore'));
-		return to_route('admin.users.trash');
-	}
-	/* *
-	force delete the user
-	*/
-	public function forceDelete(User $user)
-	{
-		if ($user->trashed()) $user->forceDelete();
-						session()->flash('message', trans('users/flash.force-delete'));
-		return to_route('admin.users.trash');
-
-	}
+       /* *
+    restore the deleted user
+    */
+    public function restore(User $user)
+    {
+        if ($user->trashed()) {
+            $user->restore();
+        }
+        session()->flash('message', trans('users/flash.restore'));
+        return to_route('admin.users.trash');
+    }
+    /* *
+    force delete the user
+    */
+    public function forceDelete(User $user)
+    {
+        if ($user->trashed()) {
+            $user->forceDelete();
+        }
+        session()->flash('message', trans('users/flash.force-delete'));
+        return to_route('admin.users.trash');
+    }
 }

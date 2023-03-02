@@ -27,12 +27,12 @@ class RouteServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->configureRateLimiting();
- Route::pattern('slug', '[a-zA-Z0-9_-]+');
- Route::pattern('id', '[0-9]+');
- Route::pattern('comment', '[0-9]+');
- Route::pattern('slider', '[0-9]+');
- Route::pattern('user', '[0-9]+');
- Route::pattern('totalcategory', '[0-9]+');
+        Route::pattern('slug', '[a-zA-Z0-9_-]+');
+        Route::pattern('id', '[0-9]+');
+        Route::pattern('comment', '[0-9]+');
+        Route::pattern('slider', '[0-9]+');
+        Route::pattern('user', '[0-9]+');
+        Route::pattern('totalcategory', '[0-9]+');
 
         $this->routes(function () {
             Route::middleware('api')
@@ -42,9 +42,9 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
         });
-		
-		// routes for admin panel
-		Route::middleware('adminpanel')->group(base_path('routes/admin.php'));
+
+        // routes for admin panel
+        Route::middleware('adminpanel')->group(base_path('routes/admin.php'));
     }
 
     /**

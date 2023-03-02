@@ -3,31 +3,29 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
-use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
 class ResetPassword extends Mailable
 {
-    use Queueable, SerializesModels;
+    use Queueable;
+    use SerializesModels;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-	 public $resetPasswordLink;
-	 public $name;
+    public $resetPasswordLink;
+    public $name;
 
     public function __construct($resetPasswordLink, $name)
     {
         //
-		$this->resetPasswordLink = $resetPasswordLink;
-		$this->name = $name;
-
+        $this->resetPasswordLink = $resetPasswordLink;
+        $this->name = $name;
     }
 
     /**
@@ -51,13 +49,13 @@ class ResetPassword extends Mailable
     {
         return new Content(
             view: 'mail.reset-password',
-			with: [
-			'resetPasswordLink' => $this->resetPasswordLink,
-			'name' => $this->name,
-			'mailHeader' => __('resetPasswordLinkMail.header'),
-						'mailMessage' => __('resetPasswordLinkMail.message'),
-			'mailFooter' => __('resetPasswordLinkMail.footer'),
-			]
+            with: [
+            'resetPasswordLink' => $this->resetPasswordLink,
+            'name' => $this->name,
+            'mailHeader' => __('resetPasswordLinkMail.header'),
+                        'mailMessage' => __('resetPasswordLinkMail.message'),
+            'mailFooter' => __('resetPasswordLinkMail.footer'),
+            ]
         );
     }
 

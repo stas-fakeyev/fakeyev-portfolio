@@ -12,12 +12,12 @@ class Languages extends Component
      *
      * @return void
      */
-	 public $currentLanguage = [];
+    public $currentLanguage = [];
     public function __construct()
     {
-		$currentLocale = LaravelLocalization::getCurrentLocale();
-		$properties = LaravelLocalization::getSupportedLocales();
-		$this->currentLanguage = ['code' => $currentLocale, 'flag' => $properties[$currentLocale]['flag'], 'native' => $properties[$currentLocale]['native']];
+        $currentLocale = LaravelLocalization::getCurrentLocale();
+        $properties = LaravelLocalization::getSupportedLocales();
+        $this->currentLanguage = ['code' => $currentLocale, 'flag' => $properties[$currentLocale]['flag'], 'native' => $properties[$currentLocale]['native']];
         //
     }
 

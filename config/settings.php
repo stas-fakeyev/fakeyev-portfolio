@@ -1,4 +1,5 @@
 <?php
+
 return [
 'address' => '123 Fake Street, LN1 2ST, London, United Kingdom',
 'phone' => '+44 123 654321',
@@ -8,4 +9,3 @@ return [
 'twitter' => 'https://twitter.com',
 'instagram' => 'https://www.instagram.com',
 ];
-?>

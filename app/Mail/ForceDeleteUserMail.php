@@ -3,7 +3,6 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
@@ -11,18 +10,19 @@ use Illuminate\Queue\SerializesModels;
 
 class ForceDeleteUserMail extends Mailable
 {
-    use Queueable, SerializesModels;
+    use Queueable;
+    use SerializesModels;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-	 protected $user;
+    protected $user;
     public function __construct($notifiable)
     {
         //
-		$this->user = $notifiable;
+        $this->user = $notifiable;
     }
 
     /**
@@ -33,7 +33,7 @@ class ForceDeleteUserMail extends Mailable
     public function envelope()
     {
         return new Envelope(
-						            subject: __('users/mail.subject-force-delete'),
+            subject: __('users/mail.subject-force-delete'),
         );
     }
 
@@ -45,13 +45,13 @@ class ForceDeleteUserMail extends Mailable
     public function content()
     {
         return new Content(
-						            view: 'mail.force-delete-user',
-						with: [
-			'user' => $this->user,
-			'mailHeader' => __('users/mail.header-force-delete'),
-						'mailMessage' => __('users/mail.message-force-delete'),
-			'mailFooter' => __('users/mail.footer-force-delete'),
-			]
+            view: 'mail.force-delete-user',
+            with: [
+            'user' => $this->user,
+            'mailHeader' => __('users/mail.header-force-delete'),
+            'mailMessage' => __('users/mail.message-force-delete'),
+            'mailFooter' => __('users/mail.footer-force-delete'),
+            ]
         );
     }
 

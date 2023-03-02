@@ -1,4 +1,5 @@
 <?php
+
 return [
 'our-clients' => 'Наши клиенты',
 'our-latest-work' => 'Наша последняя работа',

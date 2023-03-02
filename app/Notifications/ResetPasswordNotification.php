@@ -3,8 +3,6 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use App\Mail\ResetPassword;
 
@@ -17,12 +15,12 @@ class ResetPasswordNotification extends Notification
      *
      * @return void
      */
-	 protected $resetPasswordLink;
-	 
+    protected $resetPasswordLink;
+
     public function __construct($resetPasswordLink)
     {
         //
-		$this->resetPasswordLink = $resetPasswordLink;
+        $this->resetPasswordLink = $resetPasswordLink;
     }
 
     /**

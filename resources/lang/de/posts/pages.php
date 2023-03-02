@@ -1,4 +1,5 @@
 <?php
+
 return [
 'language' => 'Язык',
 'translate' => 'Добавить перевод',

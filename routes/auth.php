@@ -11,7 +11,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
-				// route for setting a new password after creating an user by administrator
+// route for setting a new password after creating an user by administrator
 Route::get('/set-password/{user}', [NewPasswordController::class, 'setPassword'])->name('set-password')->middleware('signed', 'guest');
 Route::post('make-password/{user}', [NewPasswordController::class, 'makePassword'])->name('password.make')->middleware('guest');
 

@@ -12,13 +12,13 @@ class UserRole implements Rule
      *
      * @return void
      */
-	 protected $roles = [];
+    protected $roles = [];
     public function __construct()
     {
         //
-		$role = Role::all();
-		$this->roles = $role->modelKeys();
-		}
+        $role = Role::all();
+        $this->roles = $role->modelKeys();
+    }
 
     /**
      * Determine if the validation rule passes.
@@ -30,7 +30,7 @@ class UserRole implements Rule
     public function passes($attribute, $value)
     {
         //
-		return in_array($value, $this->roles);
+        return in_array($value, $this->roles);
     }
 
     /**
@@ -40,6 +40,6 @@ class UserRole implements Rule
      */
     public function message()
     {
-		        return trans('users/validation.role_id.support');
+        return trans('users/validation.role_id.support');
     }
 }

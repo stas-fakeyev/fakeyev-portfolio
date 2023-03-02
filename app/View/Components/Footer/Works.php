@@ -13,12 +13,12 @@ class Works extends Component
      *
      * @return void
      */
-	 public $work;
-	 
+    public $work;
+
     public function __construct()
     {
         //
-		$this->work = Post::where('language', LaravelLocalization::getCurrentLocale())->latest()->first();
+        $this->work = Post::where('language', LaravelLocalization::getCurrentLocale())->latest()->first();
     }
 
     /**

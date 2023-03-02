@@ -3,8 +3,6 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use App\Mail\CreateUserMail;
 use Illuminate\Support\Carbon;
@@ -43,11 +41,12 @@ class CreateUserNotification extends Notification
      */
     public function toMail($notifiable)
     {
-		 $setPasswordUrl = URL::temporarySignedRoute(
-    'set-password', Carbon::now()->addMinutes(60),
-	['user' => $notifiable->id, 'hash' => hash_hmac( 'sha1', $notifiable->login, config('app.key') )]
-);
-		        return (new CreateUserMail($notifiable, $setPasswordUrl))->to($notifiable->email, $notifiable->name);
+        $setPasswordUrl = URL::temporarySignedRoute(
+            'set-password',
+            Carbon::now()->addMinutes(60),
+            ['user' => $notifiable->id, 'hash' => hash_hmac('sha1', $notifiable->login, config('app.key'))]
+        );
+        return (new CreateUserMail($notifiable, $setPasswordUrl))->to($notifiable->email, $notifiable->name);
     }
 
     /**

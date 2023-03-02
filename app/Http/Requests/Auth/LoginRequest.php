@@ -11,17 +11,17 @@ use Illuminate\Validation\ValidationException;
 
 class LoginRequest extends FormRequest
 {
-	protected $loginField;
-	protected $loginValue;
-	
-	protected function prepareForValidation()
-	{
-		$this->loginField = filter_var($this->input('login'), FILTER_VALIDATE_EMAIL) ? 'email' : 'login';
-		
-		$this->loginValue = $this->input('login');
-		
-		$this->merge([$this->loginField => $this->loginValue]);
-	}
+    protected $loginField;
+    protected $loginValue;
+
+    protected function prepareForValidation()
+    {
+        $this->loginField = filter_var($this->input('login'), FILTER_VALIDATE_EMAIL) ? 'email' : 'login';
+
+        $this->loginValue = $this->input('login');
+
+        $this->merge([$this->loginField => $this->loginValue]);
+    }
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -39,18 +39,15 @@ class LoginRequest extends FormRequest
      */
     public function rules()
     {
-		$rules = [];
-		$rules['password'] = ['required', 'string'];
-		
-		if (filter_var($this->input('login'), FILTER_VALIDATE_EMAIL))
-		{
-			$rules['login'] = ['required', 'email', 'exists:users,email'];
-		}
-		else
-		{
-			$rules['login'] = ['required', 'string', 'exists:users,login'];
-		}
-		return $rules;
+        $rules = [];
+        $rules['password'] = ['required', 'string'];
+
+        if (filter_var($this->input('login'), FILTER_VALIDATE_EMAIL)) {
+            $rules['login'] = ['required', 'email', 'exists:users,email'];
+        } else {
+            $rules['login'] = ['required', 'string', 'exists:users,login'];
+        }
+        return $rules;
     }
 
     /**
