@@ -89,8 +89,7 @@ public function trash()
             $totalpostObj->save();
 
             $data['totalpost_id'] = $totalpostObj->id;
-        }
-        else {
+        } else {
             $data['totalpost_id'] = $totalpost->id;
         }
 

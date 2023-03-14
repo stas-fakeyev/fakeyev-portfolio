@@ -37,6 +37,28 @@ $backgroundUrl = Storage::disk('public')->url('home-slider/source/' . $slider->i
         </div>
         <!-- End Homepage Slider -->
 @endif
+
+		<!-- Press Coverage -->
+		@isset($newspapers)
+		@php
+		$classes = [1 => 'press-wired', 'press-mashable', 'press-techcrunch'];
+		@endphp
+        <div class="section">
+	    	<div class="container">
+				<div class="row">
+				@foreach ($newspapers as $newspaper)
+					<div class="col-md-4 col-sm-6">
+						<div class="in-press {{ $classes[$loop->iteration] }}">
+							<a href="{{ $newspaper->url }}" target="_blank">{{ $newspaper->title }}</a>
+						</div>
+					</div>
+					@endforeach
+				</div>
+			</div>
+		</div>
+		@endisset
+		<!-- Press Coverage -->
+
 @isset($users)
 @if (count($users) > 0)
 			<!-- Our Clients -->

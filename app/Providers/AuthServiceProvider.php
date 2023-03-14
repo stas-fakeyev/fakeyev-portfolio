@@ -8,11 +8,13 @@ use App\Models\User;
 use App\Models\Slider;
 use App\Models\Totalpost;
 use App\Models\Totalcategory;
+use App\Models\Newspaper;
 
 use App\Policies\SliderPolicy;
 use App\Policies\UserPolicy;
 use App\Policies\TotalpostPolicy;
 use App\Policies\TotalcategoryPolicy;
+use App\Policies\NewspaperPolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -27,7 +29,7 @@ class AuthServiceProvider extends ServiceProvider
         User::class => UserPolicy::class,
                 Totalpost::class => TotalpostPolicy::class,
                 Totalcategory::class => TotalcategoryPolicy::class,
-
+Newspaper::class => NewspaperPolicy::class,
     ];
 
     /**

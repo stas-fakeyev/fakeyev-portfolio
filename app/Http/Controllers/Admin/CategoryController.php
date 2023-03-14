@@ -86,8 +86,7 @@ public function trash()
             $totalcategoryObj->save();
 
             $data['totalcategory_id'] = $totalcategoryObj->id;
-        }
-        else {
+        } else {
             $data['totalcategory_id'] = $totalcategory->id;
         }
 

@@ -173,6 +173,15 @@
                                     </ul>
                                 </li>
 @endcan
+<!-- newspappers -->
+								@can('viewAny', App\Models\Newspaper::class)
+                                <li><a data-toggle="collapse" data-target="#newspapers" href="javascript:void(0)">{{ __('newspapers/pages.section_title') }}</a>
+                                    <ul id="newspapers" class="collapse dropdown-header-top">
+                                        <li><a href="{{ route('admin.newspapers.index') }}">{{ __('newspapers/pages.section_all') }}</a></li>
+                                        <li><a href="{{ route('admin.newspapers.create') }}">{{ __('newspapers/pages.section_add') }}</a></li>
+                                    </ul>
+                                </li>
+@endcan
 </ul>
 </nav>
 </div><!-- end mobile menu -->

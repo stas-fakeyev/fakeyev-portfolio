@@ -7,12 +7,15 @@ use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\NewspaperController;
 
 Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'localeCookieRedirect', 'localizationRedirect' ]], function () {
     Route::name('admin.')->prefix('admin')->middleware('auth', 'admin')->group(function () {
         Route::get('index/', [AdminController::class, 'index'])->name('index');
 
         Route::resource('sliders', SliderController::class)->except(['show']);
+
+        Route::resource('newspapers', NewspaperController::class)->except(['show']);
 
         Route::resource('users', UserController::class)->except(['show']);
 
