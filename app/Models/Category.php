@@ -33,7 +33,10 @@ class Category extends Model
         {
             return $this->hasMany(Category::class, 'parent_id');
         }
-
+public function totalcategory()
+{
+	return $this->belongsTo(Totalcategory::class);
+}
     public function posts()
     {
         return $this->hasMany(Post::class, 'category_id');

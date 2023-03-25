@@ -17,7 +17,13 @@ class Comment extends Model
     'post_id',
     'user_id',
     ];
-
+    /**
+     * Get all of the models that own comments.
+     */
+    public function commentable()
+    {
+        return $this->morphTo();
+    }
     public function user()
     {
         return $this->belongsTo(User::class);

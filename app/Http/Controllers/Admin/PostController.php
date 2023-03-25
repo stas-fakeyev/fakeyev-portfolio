@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\PostRequest;
 use App\Models\Totalpost;
 use App\Models\Post;
@@ -84,14 +85,14 @@ public function trash()
     {
         //
         $data = $request->safe()->all();
-        if (is_null($totalpost)) {
-            $totalpostObj = new Totalpost();
-            $totalpostObj->save();
+		
+		        $post = new Post();
 
-            $data['totalpost_id'] = $totalpostObj->id;
-        } else {
-            $data['totalpost_id'] = $totalpost->id;
+        if (is_null($totalpost)) {
+            $totalpost = new Totalpost();
+            $totalpost->save();
         }
+$post->totalpost()->associate($totalpost);
 
         $requestImage = $request->file('image');
         if ($requestImage) {
@@ -99,15 +100,16 @@ public function trash()
         } else {
             $data['image'] = 'default.png';
         }
-
-        $data['user_id'] = auth()->user()->id;
-
+$user = Auth::user();
+if ($user)
+{
+	$post->user()->associate($user);
+}
         $date = new \DateTime('NOW');
         $data['month'] = $date->format('m');
         $data['year'] = $date->format('Y');
         $data['month_name'] = $date->format('F');
 
-        $post = new Post();
         $post->fill($data);
         $post->save();
 

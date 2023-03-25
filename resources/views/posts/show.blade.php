@@ -75,9 +75,13 @@
 											@enderror
 										</div>
 										<div class="form-group">
-														                        	<input id="comment_post_ID" type="hidden" name="post_id" value="{{ $post->id }}" />
+														                        	<input id="comment_post_ID" type="hidden" name="commentable_id" value="{{ $post->id }}" />
+																					<input type="hidden" name="commentable_type" value="posts" />
 				                        	<input id="comment_parent" type="hidden" name="parent_id" value="0" />
-											@error('post_id')
+											@error('commentable_id')
+											<p>{{ $message }}</p>
+											@enderror
+																						@error('commentable_type')
 											<p>{{ $message }}</p>
 											@enderror
 											@error('parent_id')

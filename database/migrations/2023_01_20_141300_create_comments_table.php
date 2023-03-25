@@ -19,14 +19,10 @@ return new class () extends Migration {
             $table->text('text');
             $table->integer('likes')->unsigned()->nullable();
             $table->integer('dizlikes')->unsigned()->nullable();
-            $table->integer('parent_id');
-            $table->bigInteger('post_id')->unsigned()->default(1);
+            $table->integer('parent_id')->default(0);
             $table->bigInteger('user_id')->unsigned()->nullable();
             $table->timestamps();
-            $table->foreign('post_id')
-            ->references('id')
-            ->on('posts')
-            ->cascadeOnDelete();
+            $table->nullableMorphs('commentable');
 
             $table->foreign('user_id')
             ->references('id')

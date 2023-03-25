@@ -21,7 +21,7 @@
 									<div class="date">{{ $post->created_at->format('d M, Y') }}</div>
 								</div>
 								<div class="post-comments-count">
-									<a href="{{ route('posts.show', ['post' => $post->slug]) }}" title="Show Comments"><i class="glyphicon glyphicon-comment icon-white"></i>{{ count($post->comments) }}</a>
+									<a href="{{ route('posts.show', ['post' => $post->slug]) }}" title="Show Comments"><i class="glyphicon glyphicon-comment icon-white"></i>{{ count($post->comments) ?? 0 }}</a>
 								</div>
 							</div>
 							<!-- End Post Info -->

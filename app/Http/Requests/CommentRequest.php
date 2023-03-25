@@ -24,35 +24,19 @@ class CommentRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-                                            'name' => [
-            'nullable',
-            'string',
-            'max:50',
-            ],
-                                    'email' => [
-                                    'nullable',
-            'email',
-            'max:50',
-            ],
-                                    'text' => [
-            'bail',
-            'required',
-            'string',
-            'max:50000',
-            ],
-'post_id' => [
-'required',
-'integer',
-            Rule::exists('posts', 'id'),
-],
-'parent_id' => [
-'present',
-'integer',
-            Rule::exists('comments', 'id'),
-],
-            //
-        ];
+		$rules = [];
+		
+		$rules['name'] = ['nullable', 'string', 'max:50'];
+		$rules['email'] = ['nullable', 'email', 'max:50'];
+		$rules['text'] = ['bail', 'required', 'string', 'max:50000'];
+		$rules['commentable_id'] = ['required', 'integer'];
+		$rules['commentable_type'] = ['required', 'string'];
+		
+		if ($this->input('parent_id'))
+		{
+			$rules['parent_id'] = ['integer', Rule::exists('comments', 'id')];
+		}
+        return $rules;
     }
     public function messages()
     {
@@ -66,10 +50,11 @@ class CommentRequest extends FormRequest
                         'text.required' => trans('comments/validation.text.required'),
                         'text.string' => trans('comments/validation.text.string'),
                                 'text.max' => trans('comments/validation.text.max'),
-// post_id
-                        'post_id.required' => trans('comments/validation.post_id.required'),
-                        'post_id.integer' => trans('comments/validation.post_id.integer'),
-                                'post_id.exists' => trans('comments/validation.post_id.exists'),
+// commentable_id
+                        'commentable_id.required' => trans('comments/validation.commentable_id.required'),
+                        'commentable_id.integer' => trans('comments/validation.commentable_id.integer'),
+						                        'commentable_type.required' => trans('comments/validation.commentable_type.required'),
+                        'commentable_type.string' => trans('comments/validation.commentable_type.string'),
 // parent_id
                                 'parent_id.integer' => trans('comments/validation.parent_id.integer'),
                                                                 'parent_id.exists' => trans('comments/validation.parent_id.exists'),

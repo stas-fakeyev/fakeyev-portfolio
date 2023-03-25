@@ -20,8 +20,8 @@ class CommentController extends Controller
     public function index(Request $request)
     {
         //
-        $post = Post::findOrFail($request->get('post_id'));
-        $comments = Comment::where('post_id', $post->id)->where('parent_id', 0)->latest('created_at')->paginate(1);
+        $post = Post::findOrFail($request->get('commentable_id'));
+        $comments = $post->comments()->where('parent_id', 0)->latest('created_at')->paginate(1);
         $comments->load('user');
 
         if ($request->ajax()) {
@@ -52,7 +52,7 @@ class CommentController extends Controller
         //
         $data = $request->safe()->all();
 
-        if ($data['parent_id']) {
+        if (isset($data['parent_id'])) {
             $parent = Comment::findOrFail($data['parent_id']);
         }
 
@@ -60,16 +60,18 @@ class CommentController extends Controller
 
         $user = Auth::user();
         if ($user) {
-            $comment->user_id = $user->id;
-            $comment->name = $user->name;
-            $comment->email = $user->email;
+			$comment->user()->associate($user);
         }
 
-        $post = Post::findOrFail($data['post_id']);
-        $post->comments()->save($comment);
+if ($data['commentable_type'] == 'posts')
+{
+        $model = Post::findOrFail($data['commentable_id']);
+		$route = 'posts';
+}
+        $model->comments()->save($comment);
 
         session()->flash('message', trans('comments/flash.comment-store'));
-        return to_route('posts.show', ['post' => $post->id]);
+        return to_route($route.'.show', ['post' => $model->slug]);
     }
     public function like(Comment $comment)
     {

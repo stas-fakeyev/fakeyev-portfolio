@@ -81,16 +81,15 @@ public function trash()
     {
         //
         $data = $request->safe()->all();
+		
+		        $category = new Category();
+
         if (is_null($totalcategory)) {
-            $totalcategoryObj = new Totalcategory();
-            $totalcategoryObj->save();
+            $totalcategory = new Totalcategory();
+            $totalcategory->save();
 
-            $data['totalcategory_id'] = $totalcategoryObj->id;
-        } else {
-            $data['totalcategory_id'] = $totalcategory->id;
         }
-
-        $category = new Category();
+$category->totalcategory()->associate($totalcategory);
         $category->fill($data);
         $category->save();
 

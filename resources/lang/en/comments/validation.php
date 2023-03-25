@@ -14,10 +14,13 @@ return [
 'string' => 'the text has to be a string',
 'max' => 'you can write maximum 50000 symbols',
 ],
-'post_id' => [
-'required' => 'the Post id cannot be empty',
-'integer' => 'the Post id has to be a number',
-'exists' => 'this Post does not exist',
+'commentable_id' => [
+'required' => 'the  id cannot be empty',
+'integer' => 'the  id has to be a number',
+],
+'commentable_type' => [
+'required' => 'the Type cannot be empty',
+'string' => 'the Type has to be a string',
 ],
 'parent_id' => [
 'integer' => 'the  Parent id has to be a number',

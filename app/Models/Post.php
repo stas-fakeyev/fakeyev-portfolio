@@ -43,8 +43,16 @@ class Post extends Model
     */
     public function comments()
     {
-        return $this->hasMany(Comment::class);
+        return $this->morphMany(Comment::class, 'commentable');
     }
+	public function user()
+	{
+		return $this->belongsTo(User::class);
+	}
+	public function totalpost()
+	{
+		return $this->belongsTo(Totalpost::class);
+	}
     /**
    * scopes
     */
