@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
+use App\Jobs\UpdatePost;
 use App\Http\Requests\CategoryRequest;
 
 use App\Models\Totalcategory;
@@ -26,8 +27,6 @@ class CategoryController extends Controller
                              'show' => 'view',
                              'create' => 'create',
                              'store' => 'create',
-                             'restore' => 'restore',
-                             'forceDelete' => 'forceDelete',
                          ];
                      }
             protected function resourceMethodsWithoutModels()
@@ -52,8 +51,8 @@ class CategoryController extends Controller
 public function trash()
 {
     $totalcategories = Totalcategory::with(['categories' => function ($query) {
-        $query->where('language', LaravelLocalization::getCurrentLocale());
-    }])->onlyTrashed()->get();
+        $query->where('language', LaravelLocalization::getCurrentLocale())->onlyTrashed();
+    }])->get();
 
     return view('admin.categories.trash', compact('totalcategories'));
 }
@@ -81,17 +80,22 @@ public function trash()
     {
         //
         $data = $request->safe()->all();
-		
-		        $category = new Category();
+
+        $category = new Category();
 
         if (is_null($totalcategory)) {
             $totalcategory = new Totalcategory();
             $totalcategory->save();
-
         }
-$category->totalcategory()->associate($totalcategory);
+        $category->totalcategory()->associate($totalcategory);
         $category->fill($data);
         $category->save();
+
+        /* *
+        check has the current category some parent category.
+        if the category has the parent, get posts attached to this category, then detach everything, and attach the current category and the parent category.
+        */
+        UpdatePost::dispatchIf($category->parent, $category)->onQueue('syncpost')->delay(now()->addMinutes(1));
 
         session()->flash('message', trans('categories/flash.store'));
         return to_route('admin.categories.edit', ['category' => $category->id, 'language' => $category->language]);
@@ -143,6 +147,12 @@ $category->totalcategory()->associate($totalcategory);
         $category->fill($data);
         $category->save();
 
+        /* *
+        check has the current category some parent category.
+        if the category has the parent, get posts attached to this category, then detach everything, and attach the current category and the parent category.
+        */
+        UpdatePost::dispatchIf($category->parent, $category)->onQueue('syncpost')->delay(now()->addMinutes(1));
+
         session()->flash('message', trans('categories/flash.update'));
         return to_route('admin.categories.edit', ['category' => $category->id, 'language' => $category->language]);
     }
@@ -158,24 +168,32 @@ $category->totalcategory()->associate($totalcategory);
         //
         Gate::authorize('destroy-category');
 
-        $totalcategory = Totalcategory::findOrFail($category->totalcategory_id);
-        $totalcategory->delete();
+        $category->delete();
 
         session()->flash('message', trans('categories/flash.delete'));
         return to_route('admin.categories.index');
     }
-        public function restore(Totalcategory $totalcategory)
+        public function restore(Category $category)
         {
-            if ($totalcategory->trashed()) {
-                $totalcategory->restore();
+            Gate::authorize('restore-category');
+
+            if ($category->trashed()) {
+                $category->restore();
             }
             session()->flash('message', trans('categories/flash.restore'));
             return to_route('admin.categories.trash');
         }
-    public function forceDelete(Totalcategory $totalcategory)
+    public function forceDelete(Totalcategory $totalcategory, Category $category)
     {
-        if ($totalcategory->trashed()) {
-            $totalcategory->forceDelete();
+        Gate::authorize('forceDelete-category');
+
+        if ($category->trashed()) {
+            $category->forceDelete();
+
+            if (count($totalcategory->categories) == 0) {
+                $totalcategory->delete();
+            }
+
             session()->flash('message', trans('categories/flash.force-delete'));
         }
         return to_route('admin.categories.trash');

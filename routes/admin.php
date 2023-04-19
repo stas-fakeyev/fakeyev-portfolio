@@ -40,8 +40,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
         Route::resource('categories', CategoryController::class)->except(['show', 'create', 'store'])->whereNumber('category');
         Route::controller(CategoryController::class)->group(function () {
             Route::get('categories/trash', 'trash')->name('categories.trash');
-            Route::post('categories/restore/{totalcategory}', 'restore')->withTrashed()->name('categories.restore');
-            Route::delete('categories/force-delete/{totalcategory}', 'forceDelete')->withTrashed()->name('categories.force-delete');
+            Route::post('categories/restore/{category}', 'restore')->withTrashed()->name('categories.restore');
+            Route::delete('categories/force-delete/{totalcategory}/{category}', 'forceDelete')->withTrashed()->name('categories.force-delete');
             Route::get('categories/create/{totalcategory?}', 'create')->name('categories.create');
             Route::post('categories/store/{totalcategory?}', 'store')->name('categories.store');
         });

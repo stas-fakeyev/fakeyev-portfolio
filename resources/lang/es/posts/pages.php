@@ -15,4 +15,6 @@ return [
 'language' => 'Language',
 'translate' => 'add a translate in',
 'read-more' => 'Read more',
+'categories' => 'Категорії: ',
+
 ];

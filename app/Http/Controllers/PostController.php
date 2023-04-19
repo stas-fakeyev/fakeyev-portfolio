@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Builder;
 
 use App\Models\Post;
-use App\Models\Comment;
 use App\Models\Category;
 
 use LaravelLocalization;
@@ -26,7 +26,9 @@ class PostController extends Controller
     }
 public function category(Category $category)
 {
-    $posts = Post::where('category_id', $category->id)->latest()->get();
+    $posts = Post::whereHas('categories', function (Builder $query) use ($category) {
+        $query->where('category_id', $category->id);
+    })->latest()->get();
     return view('posts.index', compact('posts'));
 }
     /**

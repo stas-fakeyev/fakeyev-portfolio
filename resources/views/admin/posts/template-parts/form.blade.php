@@ -62,12 +62,30 @@
 																		                                    <h2>{{ __('posts/form.category') }}</h2>
                                     </div>
 									                                <div class="bootstrap-select fm-cmp-mg">
+																	@php
+																	$cat_id = 0;
+																	@endphp
+																@if (isset($post) && count($post->categories) > 0)
+																	@foreach ($post->categories as $cat)
+																@if ($loop->count == 1)
+																	@php
+																	$cat_id = $cat->id;
+																	@endphp
+																@else
+																	@if ($loop->last)
+																		@php
+																		$cat_id = $cat->id;
+																		@endphp
+																	@endif
+																@endif
+																		@endforeach
+																		@endif
                                     <select class="selectpicker" name="category_id">
 																										@if (count($categories) > 0)
 																		@foreach($categories as $category)
 <option value="{{ $category->id }}"
 @php
-if (isset($post) && $post->category_id == $category->id) echo' selected';
+if ($cat_id == $category->id) echo' selected';
 elseif (old('category_id') == $category->id) echo' selected';
 @endphp
 >{{ $category->title }}</option>

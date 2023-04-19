@@ -23,13 +23,13 @@
                                     <div class="recent-post-flex rct-pt-mg">
                                         <div class="recent-post-it-ctn">
                                             <h2>{{ $category->title }}</a></h2>
-																						<form action="{{ route('admin.categories.restore', ['totalcategory' => $totalcategory->id]) }}" method="POST">
+																						<form action="{{ route('admin.categories.restore', ['category' => $category->id]) }}" method="POST">
 											@csrf
 											@method('POST')
 											                            <button class="btn btn-primary btn-md hec-button">{{ __('categories/pages.restore') }}</button>
 																		</form>
 
-											<form action="{{ route('admin.categories.force-delete', ['totalcategory' => $totalcategory->id]) }}" method="POST">
+											<form action="{{ route('admin.categories.force-delete', ['totalcategory' => $totalcategory->id, 'category' => $category->id]) }}" method="POST">
 											@csrf
 											@method('DELETE')
 											                            <button class="btn btn-primary btn-md hec-button">{{ __('categories/pages.force-delete') }}</button>

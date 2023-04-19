@@ -25,24 +25,24 @@ class UserSeeder extends Seeder
         'password' => Hash::make('12345678'),
         'role_id' => 1,
         'created_at' => date('Y-m-d H:i,s'),
-		],
-		        [
+        ],
+                [
         'name' => 'John smith',
         'login' => 'john_login',
         'email' => 'john@gmail.com',
         'password' => Hash::make('12345678'),
         'role_id' => 2,
         'created_at' => date('Y-m-d H:i,s'),
-		],
-		        [
+        ],
+                [
         'name' => 'Andrew johnson',
         'login' => 'andrew_login',
         'email' => 'johnson@gmail.com',
         'password' => Hash::make('12345678'),
         'role_id' => 3,
         'created_at' => date('Y-m-d H:i,s'),
-		],
-		        [
+        ],
+                [
         'name' => 'Canon',
         'login' => 'canon_login',
         'email' => 'canon@gmail.com',
@@ -50,7 +50,7 @@ class UserSeeder extends Seeder
         'role_id' => 4,
         'created_at' => date('Y-m-d H:i,s'),
         ],
-		        [
+                [
         'name' => 'Cisco',
         'login' => 'cisco_login',
         'email' => 'cisco@gmail.com',
@@ -58,7 +58,7 @@ class UserSeeder extends Seeder
         'role_id' => 4,
         'created_at' => date('Y-m-d H:i,s'),
         ],
-		        [
+                [
         'name' => 'Dell',
         'login' => 'dell_login',
         'email' => 'dell@gmail.com',
@@ -66,7 +66,7 @@ class UserSeeder extends Seeder
         'role_id' => 4,
         'created_at' => date('Y-m-d H:i,s'),
         ],
-		        [
+                [
         'name' => 'Ea',
         'login' => 'ea_login',
         'email' => 'ea@gmail.com',
@@ -74,7 +74,7 @@ class UserSeeder extends Seeder
         'role_id' => 4,
         'created_at' => date('Y-m-d H:i,s'),
         ],
-		        [
+                [
         'name' => 'Ebay',
         'login' => 'ebay_login',
         'email' => 'ebay@gmail.com',
@@ -82,7 +82,7 @@ class UserSeeder extends Seeder
         'role_id' => 4,
         'created_at' => date('Y-m-d H:i,s'),
         ],
-		        [
+                [
         'name' => 'Facebook',
         'login' => 'facebook_login',
         'email' => 'facebook@gmail.com',
@@ -90,7 +90,7 @@ class UserSeeder extends Seeder
         'role_id' => 4,
         'created_at' => date('Y-m-d H:i,s'),
         ],
-		        [
+                [
         'name' => 'Google',
         'login' => 'google_login',
         'email' => 'google@gmail.com',
@@ -98,7 +98,7 @@ class UserSeeder extends Seeder
         'role_id' => 4,
         'created_at' => date('Y-m-d H:i,s'),
         ],
-		        [
+                [
         'name' => 'Hp',
         'login' => 'hp_login',
         'email' => 'hp@gmail.com',
@@ -106,7 +106,7 @@ class UserSeeder extends Seeder
         'role_id' => 4,
         'created_at' => date('Y-m-d H:i,s'),
         ],
-		        [
+                [
         'name' => 'Microsoft',
         'login' => 'microsoft_login',
         'email' => 'microsoft@gmail.com',
@@ -114,7 +114,7 @@ class UserSeeder extends Seeder
         'role_id' => 4,
         'created_at' => date('Y-m-d H:i,s'),
         ],
-		        [
+                [
         'name' => 'Sony',
         'login' => 'sony_login',
         'email' => 'sony@gmail.com',
@@ -122,7 +122,7 @@ class UserSeeder extends Seeder
         'role_id' => 4,
         'created_at' => date('Y-m-d H:i,s'),
         ],
-		        [
+                [
         'name' => 'Yahoo',
         'login' => 'yahoo_login',
         'email' => 'yahoo@gmail.com',
@@ -130,7 +130,7 @@ class UserSeeder extends Seeder
         'role_id' => 4,
         'created_at' => date('Y-m-d H:i,s'),
         ],
-		        [
+                [
         'name' => 'Mysql',
         'login' => 'mysql_login',
         'email' => 'mysql@gmail.com',

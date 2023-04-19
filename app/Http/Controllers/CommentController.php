@@ -60,14 +60,13 @@ class CommentController extends Controller
 
         $user = Auth::user();
         if ($user) {
-			$comment->user()->associate($user);
+            $comment->user()->associate($user);
         }
 
-if ($data['commentable_type'] == 'posts')
-{
-        $model = Post::findOrFail($data['commentable_id']);
-		$route = 'posts';
-}
+        if ($data['commentable_type'] == 'posts') {
+            $model = Post::findOrFail($data['commentable_id']);
+            $route = 'posts';
+        }
         $model->comments()->save($comment);
 
         session()->flash('message', trans('comments/flash.comment-store'));

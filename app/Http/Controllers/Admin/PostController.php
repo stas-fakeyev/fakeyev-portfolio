@@ -17,7 +17,7 @@ use LaravelLocalization;
 class PostController extends Controller
 {
     private $imageSaver;
-
+    protected $categories = [];
     public function __construct(ImageSaver $imageSaver)
     {
         $this->imageSaver = $imageSaver;
@@ -85,14 +85,14 @@ public function trash()
     {
         //
         $data = $request->safe()->all();
-		
-		        $post = new Post();
+
+        $post = new Post();
 
         if (is_null($totalpost)) {
             $totalpost = new Totalpost();
             $totalpost->save();
         }
-$post->totalpost()->associate($totalpost);
+        $post->totalpost()->associate($totalpost);
 
         $requestImage = $request->file('image');
         if ($requestImage) {
@@ -100,11 +100,10 @@ $post->totalpost()->associate($totalpost);
         } else {
             $data['image'] = 'default.png';
         }
-$user = Auth::user();
-if ($user)
-{
-	$post->user()->associate($user);
-}
+        $user = Auth::user();
+        if ($user) {
+            $post->user()->associate($user);
+        }
         $date = new \DateTime('NOW');
         $data['month'] = $date->format('m');
         $data['year'] = $date->format('Y');
@@ -112,6 +111,15 @@ if ($user)
 
         $post->fill($data);
         $post->save();
+
+        $category = Category::where('id', $data['category_id'])->first();
+        if ($category) {
+            if ($category->parent_id > 0) {
+                $this->categories[] = $category->parent_id;
+            }
+            $this->categories[] = $category->id;
+        }
+        $post->categories()->attach($this->categories);
 
         session()->flash('message', trans('posts/flash.store'));
         return to_route('admin.posts.edit', ['post' => $post->id, 'language' => $post->language]);
@@ -170,6 +178,16 @@ if ($user)
 
         $post->fill($data);
         $post->save();
+
+        $category = Category::where('id', $data['category_id'])->first();
+        if ($category) {
+            if ($category->parent_id > 0) {
+                $this->categories[] = $category->parent_id;
+            }
+            $this->categories[] = $category->id;
+        }
+        $post->categories()->detach();
+        $post->categories()->attach($this->categories);
 
         session()->flash('message', trans('posts/flash.update'));
         return to_route('admin.posts.edit', ['post' => $post->id, 'language' => $post->language]);

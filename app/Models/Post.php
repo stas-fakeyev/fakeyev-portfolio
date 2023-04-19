@@ -21,7 +21,6 @@ class Post extends Model
     'language',
     'user_id',
     'totalpost_id',
-    'category_id',
     'month',
     'year',
     'month_name',
@@ -45,14 +44,18 @@ class Post extends Model
     {
         return $this->morphMany(Comment::class, 'commentable');
     }
-	public function user()
-	{
-		return $this->belongsTo(User::class);
-	}
-	public function totalpost()
-	{
-		return $this->belongsTo(Totalpost::class);
-	}
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    public function totalpost()
+    {
+        return $this->belongsTo(Totalpost::class);
+    }
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
+    }
     /**
    * scopes
     */

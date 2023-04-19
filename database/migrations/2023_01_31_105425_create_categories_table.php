@@ -20,6 +20,7 @@ return new class () extends Migration {
             $table->string('language', 2);
             $table->bigInteger('totalcategory_id')->unsigned();
             $table->timestamps();
+            $table->softDeletes();
             $table->foreign('totalcategory_id')
             ->references('id')
             ->on('totalcategories')

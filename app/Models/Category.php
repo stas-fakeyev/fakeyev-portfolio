@@ -4,11 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 
 class Category extends Model
 {
     use HasFactory;
+    use SoftDeletes;
+    protected $dates = ['deleted_at'];
 
     protected $fillable = [
     'title',
@@ -33,13 +36,17 @@ class Category extends Model
         {
             return $this->hasMany(Category::class, 'parent_id');
         }
+        public function parent()
+        {
+            return $this->belongsTo(Category::class, 'parent_id');
+        }
 public function totalcategory()
 {
-	return $this->belongsTo(Totalcategory::class);
+    return $this->belongsTo(Totalcategory::class);
 }
     public function posts()
     {
-        return $this->hasMany(Post::class, 'category_id');
+        return $this->belongsToMany(Post::class);
     }
     public function validParent($id)
     {

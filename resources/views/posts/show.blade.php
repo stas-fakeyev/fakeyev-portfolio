@@ -15,6 +15,17 @@
 						<div class="blog-post blog-single-post">
 							<div class="single-post-title">
 								<h3>{{ $post->title }}</h3>
+								@if ($post->categories->count() > 0)
+									<p>{{ __('posts/pages.categories') }}
+								@foreach ($post->categories as $category)
+								<a href="{{ route('posts.category', ['category' => $category->slug]) }}">{{ $category->title }}
+								@if ($loop->last === false)
+									 |
+								 @endif
+</a>
+								@endforeach
+								</p>
+								@endif
 							</div>
 							<div class="single-post-info">
 								<i class="glyphicon glyphicon-time"></i>{{ $post->created_at->format('d M, Y') }} <a href="javascript:void(0)" title="Show Comments"><i class="glyphicon glyphicon-comment"></i>{{ count($post->comments) }}</a>

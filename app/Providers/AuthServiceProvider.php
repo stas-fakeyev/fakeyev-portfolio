@@ -66,6 +66,12 @@ Newspaper::class => NewspaperPolicy::class,
         Gate::define('destroy-category', function ($user) {
             return $user->role->name === 'administrator' || $user->role->name === 'editor';
         });
+        Gate::define('restore-category', function ($user) {
+            return $user->role->name === 'administrator' || $user->role->name === 'editor';
+        });
+        Gate::define('forceDelete-category', function ($user) {
+            return $user->role->name === 'administrator' || $user->role->name === 'editor';
+        });
 
         //
     }

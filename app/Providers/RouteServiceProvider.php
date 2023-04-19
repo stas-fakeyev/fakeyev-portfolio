@@ -33,8 +33,8 @@ class RouteServiceProvider extends ServiceProvider
         Route::pattern('slider', '[0-9]+');
         Route::pattern('user', '[0-9]+');
         Route::pattern('totalcategory', '[0-9]+');
-Route::pattern('commentable_id', '[0-9]+');
-Route::pattern('commentable_type', '[a-zA-Z_-]+');
+        Route::pattern('commentable_id', '[0-9]+');
+        Route::pattern('commentable_type', '[a-zA-Z_-]+');
 
         $this->routes(function () {
             Route::middleware('api')
